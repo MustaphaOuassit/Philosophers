@@ -6,7 +6,7 @@
 /*   By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 20:41:07 by mouassit          #+#    #+#             */
-/*   Updated: 2022/02/13 19:52:03 by mouassit         ###   ########.fr       */
+/*   Updated: 2022/02/16 23:21:21 by mouassit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,3 +25,7 @@ typedef struct s_info
     int  time_to_sleep;
     char   *str;
 } info_t;
+typedef struct s_data
+{
+    int nb_philo;
+} data_t;
