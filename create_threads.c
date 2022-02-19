@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   create_threads.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/12 20:40:24 by mouassit          #+#    #+#             */
-/*   Updated: 2022/02/19 19:49:42 by mouassit         ###   ########.fr       */
+/*   Created: 2022/02/19 19:34:34 by mouassit          #+#    #+#             */
+/*   Updated: 2022/02/19 19:40:35 by mouassit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int main(int argc,char **argv)
+void    *routine(void *arg)
 {
-    data_t      *data;
-	data_t		**fill;
+    data_t *data;
+
+    data = (data_t *)arg;
+	data->nb_philo++;
+	printf("%d\n",data->nb_philo);
+    return NULL;
+}
+
+void	create_threads(int nb_philo, data_t *data)
+{
+	pthread_t	*thread_id;
+	int			i;
 	
-    if (!check_info(argc))
-    {
-    	data = malloc(sizeof(data_t));
-		fill = NULL;
-		fill_data(data, argv);
-		info_philo(data->info.number_of_philosopher, fill);
-		data->nb_philo = 0;
-		create_threads(data->info.number_of_philosopher,data);
+	thread_id = (pthread_t *)malloc(sizeof(pthread_t) * nb_philo);
+	i = 0;
+	while (i < nb_philo)
+	{
+		pthread_create(&thread_id[i], NULL, routine, data);
+        i++;
     }
 }
