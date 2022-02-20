@@ -6,7 +6,7 @@
 /*   By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 20:41:07 by mouassit          #+#    #+#             */
-/*   Updated: 2022/02/19 19:35:40 by mouassit         ###   ########.fr       */
+/*   Updated: 2022/02/20 21:32:38 by mouassit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ typedef struct s_info
 	char	time_to_die;
 	int		time_to_eat;
 	int		time_to_sleep;
-}	info_t;
+}	info_t;     
 
 typedef struct s_data
 {
-	int nb_philo;
-	info_t info;
+	pthread_t thread_id;
+	int		nb_philo;
 }	data_t;
 
-void	info_philo(int nb, data_t **fill);
-int		check_info(int argc);
-int		ft_atoi(const char *str);
-void	fill_data(data_t *data, char **argv);
-void	create_threads(int nb_philo, data_t *data);
+int				check_info(int argc, char **argv,info_t *data);
+data_t			*info_philo(info_t data);
+pthread_mutex_t	*info_fork(int nb_philo);
+void			create_threads(info_t data ,data_t *philosophers, pthread_mutex_t *forks);
+int				ft_atoi(const char *str);
