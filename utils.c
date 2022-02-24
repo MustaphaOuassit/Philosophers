@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/12 20:40:24 by mouassit          #+#    #+#             */
-/*   Updated: 2022/02/24 07:12:24 by mouassit         ###   ########.fr       */
+/*   Created: 2022/02/24 06:17:52 by mouassit          #+#    #+#             */
+/*   Updated: 2022/02/24 08:41:43 by mouassit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int main(int argc,char **argv)
+long    get_time()
 {
-	info_t			data;
-    data_t			*philosophers;
-	pthread_mutex_t *forks;
-	
-    if (!check_info(argc, argv, &data))
-    {
-    	philosophers = info_philo(data);
-		forks = info_fork(data.number_of_philosopher);
-		create_threads(data ,philosophers, forks);
-    }
+    struct timeval	time;
+    
+    gettimeofday(&time, NULL);
+    return((time.tv_sec * 1000) + (time.tv_usec / 100));
+}
+
+void    put_forks(data_t *philosophers)
+{
+    pthread_mutex_unlock(philosophers->left_fork);
+    pthread_mutex_unlock(philosophers->right_fork);
 }

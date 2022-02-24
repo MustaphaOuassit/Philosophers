@@ -6,7 +6,7 @@
 /*   By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 18:49:51 by mouassit          #+#    #+#             */
-/*   Updated: 2022/02/20 22:05:00 by mouassit         ###   ########.fr       */
+/*   Updated: 2022/02/24 09:11:31 by mouassit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ data_t	*info_philo(info_t data)
 	while (i < data.number_of_philosopher)
 	{
 		philo[i].nb_philo = i + 1;
+		philo[i].time_to_eat = data.time_to_eat;
 		i++;
 	}
 	return(philo);
@@ -32,11 +33,13 @@ int		check_info(int argc, char **argv, info_t *data)
 	int i;
 	
 	i = 0;
-	if (argc < 2)
+	if (argc < 4)
 	{
 		printf("Error : arguments\n");
 		return (1);
 	}
 	data->number_of_philosopher = ft_atoi(argv[1]);
+	data->time_to_eat = ft_atoi(argv[3]);
+	data->start_time = get_time();
 	return(0);
 }

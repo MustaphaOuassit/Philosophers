@@ -6,7 +6,7 @@
 #    By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 09:44:25 by mouassit          #+#    #+#              #
-#    Updated: 2022/02/20 15:40:19 by mouassit         ###   ########.fr        #
+#    Updated: 2022/02/24 06:40:31 by mouassit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRC = main.c\
 	  info_philo.c\
 	  info_fork.c\
 	  create_threads.c\
+	  utils.c\
 	  libft.c\
 
 all : $(NAME)
