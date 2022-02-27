@@ -6,7 +6,7 @@
 /*   By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 19:34:34 by mouassit          #+#    #+#             */
-/*   Updated: 2022/02/27 13:41:39 by mouassit         ###   ########.fr       */
+/*   Updated: 2022/02/27 17:25:15 by mouassit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,12 @@ void	create_threads(info_t data ,data_t *philosophers, pthread_mutex_t *forks)
     i = 0;
     info = malloc(sizeof(*info));
     pthread_mutex_init(&message, NULL);
+    data.start_time = get_time();
     info->message = message;
     while (i < data.number_of_philosopher)
     {
         philosophers[i].start_time = data.start_time;
+        philosophers[i].last_eat = data.start_time;
         philosophers[i].info = info;
         philosophers[i].left_fork = &forks[i];
         philosophers[i].right_fork = &forks[(i + 1) % data.number_of_philosopher];

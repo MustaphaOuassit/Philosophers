@@ -6,7 +6,7 @@
 /*   By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 18:49:51 by mouassit          #+#    #+#             */
-/*   Updated: 2022/02/27 13:35:03 by mouassit         ###   ########.fr       */
+/*   Updated: 2022/02/27 17:07:22 by mouassit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ data_t	*info_philo(info_t data)
 	
 	philo = malloc(sizeof(*philo) * data.number_of_philosopher);
 	i = 0;
+	
 	while (i < data.number_of_philosopher)
 	{
 		philo[i].nb_philo = i + 1;
