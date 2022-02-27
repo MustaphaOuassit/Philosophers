@@ -6,7 +6,7 @@
 /*   By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 06:17:52 by mouassit          #+#    #+#             */
-/*   Updated: 2022/02/24 08:41:43 by mouassit         ###   ########.fr       */
+/*   Updated: 2022/02/27 13:58:08 by mouassit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,37 @@ void    put_forks(data_t *philosophers)
 {
     pthread_mutex_unlock(philosophers->left_fork);
     pthread_mutex_unlock(philosophers->right_fork);
+}
+
+void    edit_usleep(long time)
+{
+    printf("--------------%ld----------\n",time);
+}
+
+void    *supervisor(data_t *philosophers, int time_to_die)
+{
+    int i;
+    
+    while (1)
+    {
+        i = 0;
+        while (i < philosophers->nb_philo)
+        {
+            if (get_time() - philosophers[i].last_eat >= time_to_die)
+            {
+                pthread_mutex_lock(&philosophers[i].info->message);
+                printf("%d died\n",philosophers->nb_philo);
+                return NULL;
+
+            }
+            i++;
+        }   
+    }
+}
+
+void    print_state(data_t *philosophers, char *str)
+{
+    pthread_mutex_lock(&philosophers->info->message);
+    printf("%ld %d %s\n",get_time() - philosophers->start_time,philosophers->nb_philo ,str);
+    pthread_mutex_unlock(&philosophers->info->message);
 }
