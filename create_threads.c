@@ -6,7 +6,7 @@
 /*   By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 19:34:34 by mouassit          #+#    #+#             */
-/*   Updated: 2022/03/01 02:08:26 by mouassit         ###   ########.fr       */
+/*   Updated: 2022/03/01 04:43:45 by mouassit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ void    eating(data_t *philosophers)
 {
     philosophers->eat = 1;
     print_state(philosophers, "is eating");
-    usleep((philosophers->time_to_eat * 1000) - 20000);
-    put_forks(philosophers);
+    fix_usleep(philosophers->time_to_eat * 1000);
     philosophers->eat = 0;
+    put_forks(philosophers);
     philosophers->last_eat = get_time();
 }
 
 void    sleeping(data_t *philosophers)
 {
     print_state(philosophers, "is sleeping");
-    usleep((philosophers->time_to_sleep * 1000) - 20000);
+    fix_usleep(philosophers->time_to_sleep * 1000);
 }
 
 void    *routine(void *arg)
@@ -56,12 +56,10 @@ void	create_threads(info_t data ,data_t *philosophers, pthread_mutex_t *forks)
     int     i;
     info_t  *info;
     pthread_mutex_t message;
-    pthread_mutex_t check_eat;
        
     i = 0;
     info = malloc(sizeof(*info));
     pthread_mutex_init(&message, NULL);
-    pthread_mutex_init(&check_eat, NULL);
     info->message = message;
     data.start_time = get_time();
     while (i < data.number_of_philosopher)
@@ -73,7 +71,6 @@ void	create_threads(info_t data ,data_t *philosophers, pthread_mutex_t *forks)
         philosophers[i].right_fork = &forks[(i + 1) % data.number_of_philosopher];
         pthread_create(&philosophers[i].thread_id, NULL, routine, &philosophers[i]);
         usleep(100);
-        
         i++;
     }
 }
