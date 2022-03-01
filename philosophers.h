@@ -6,7 +6,7 @@
 /*   By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 20:41:07 by mouassit          #+#    #+#             */
-/*   Updated: 2022/02/27 13:58:12 by mouassit         ###   ########.fr       */
+/*   Updated: 2022/03/01 01:44:11 by mouassit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct s_info
 {
 	long			start_time;
 	int				number_of_philosopher;
-	char			time_to_die;
+	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
 	pthread_mutex_t	message;
@@ -50,4 +50,5 @@ void			put_forks(data_t *philosophers);
 void			edit_usleep(long time);
 void			*supervisor(data_t *philosophers, int time_to_die);
 void			print_state(data_t *philosophers, char *str);
+void			fix_usleep(useconds_t time);
 int				ft_atoi(const char *str);

@@ -6,7 +6,7 @@
 #    By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 09:44:25 by mouassit          #+#    #+#              #
-#    Updated: 2022/02/24 06:40:31 by mouassit         ###   ########.fr        #
+#    Updated: 2022/02/28 21:51:59 by mouassit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRC = main.c\
 all : $(NAME)
 
 $(NAME): $(SRC)
-	@gcc -Wall -Wextra -Werror -fsanitize=address -g $(SRC) -o $(NAME)
+	@gcc -Wall -Wextra -Werror $(SRC) -o $(NAME)
 
 clean:
 	@rm -rf $(NAME)

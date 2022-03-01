@@ -6,7 +6,7 @@
 /*   By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 18:49:51 by mouassit          #+#    #+#             */
-/*   Updated: 2022/02/27 17:07:22 by mouassit         ###   ########.fr       */
+/*   Updated: 2022/03/01 00:08:39 by mouassit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,5 @@ int		check_info(int argc, char **argv, info_t *data)
 	data->time_to_die = ft_atoi(argv[2]);
 	data->time_to_eat = ft_atoi(argv[3]);
 	data->time_to_sleep = ft_atoi(argv[4]);
-	data->start_time = get_time();
 	return(0);
 }

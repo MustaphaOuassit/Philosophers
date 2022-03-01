@@ -6,7 +6,7 @@
 /*   By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 06:17:52 by mouassit          #+#    #+#             */
-/*   Updated: 2022/02/27 17:52:06 by mouassit         ###   ########.fr       */
+/*   Updated: 2022/03/01 02:00:13 by mouassit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ long    get_time()
     struct timeval	time;
     
     gettimeofday(&time, NULL);
-    return((time.tv_sec * 1000) + (time.tv_usec / 100));
+    return((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
 void    put_forks(data_t *philosophers)
@@ -34,7 +34,6 @@ void    edit_usleep(long time)
 void    *supervisor(data_t *philosophers, int time_to_die)
 {
     int i;
-    
     while (1)
     {
         i = 0;
@@ -42,15 +41,23 @@ void    *supervisor(data_t *philosophers, int time_to_die)
         {
             if (get_time() - philosophers[i].last_eat >= time_to_die)
             {
-                
                 pthread_mutex_lock(&philosophers[i].info->message);
-                printf("%ld %d died\n",get_time() - philosophers[i].last_eat,philosophers[i].nb_philo);
+                printf("%ld %d died\n",get_time() - philosophers[i].start_time,philosophers[i].nb_philo);
                 return NULL;
-
             }
             i++;
-        }   
+        }
     }
+}
+
+void    fix_usleep(useconds_t time)
+{
+    long    start_time;
+
+    start_time = get_time();
+    usleep(time - 20000);
+    while (get_time() - start_time < time);
+    
 }
 
 void    print_state(data_t *philosophers, char *str)
