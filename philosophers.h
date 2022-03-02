@@ -6,7 +6,7 @@
 /*   By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 20:41:07 by mouassit          #+#    #+#             */
-/*   Updated: 2022/03/01 03:33:13 by mouassit         ###   ########.fr       */
+/*   Updated: 2022/03/02 16:05:19 by mouassit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_info
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
+	int				must_eat;
 	pthread_mutex_t	message;
 }	info_t;
 
@@ -38,6 +39,7 @@ typedef struct s_data
 	int				eat;
 	int				time_to_eat;
 	int				time_to_sleep;
+	int				philo_must_eat;
 	long			last_eat;
 }	data_t;
 
@@ -48,7 +50,12 @@ void			create_threads(info_t data ,data_t *philosophers, pthread_mutex_t *forks)
 long			get_time();
 void			put_forks(data_t *philosophers);
 void			edit_usleep(long time);
-void			*supervisor(data_t *philosophers, int time_to_die);
+void			*supervisor(data_t *philosophers, info_t data);
 void			print_state(data_t *philosophers, char *str);
 void			fix_usleep(useconds_t time);
+void			*routine(void *arg);
+void			create_philo_pair(data_t *philosophers, info_t data, info_t *info, pthread_mutex_t *forks);
+void			create_philo_unpair(data_t *philosophers, info_t data, info_t *info, pthread_mutex_t *forks);
 int				ft_atoi(const char *str);
+int				ft_isdigit(int n);
+size_t			ft_strlen(const char *str);

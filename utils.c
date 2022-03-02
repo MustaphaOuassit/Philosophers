@@ -6,7 +6,7 @@
 /*   By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 06:17:52 by mouassit          #+#    #+#             */
-/*   Updated: 2022/03/01 04:53:13 by mouassit         ###   ########.fr       */
+/*   Updated: 2022/03/02 13:01:31 by mouassit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,29 +34,40 @@ void    put_forks(data_t *philosophers)
     pthread_mutex_unlock(philosophers->right_fork);
 }
 
-void    edit_usleep(long time)
+int     check_must_eat(data_t *philosophers, info_t data)
 {
-    printf("--------------%ld----------\n",time);
+    int i;
+
+    i = 0;
+    while (i < data.number_of_philosopher)
+    {
+        if(philosophers[i].philo_must_eat < data.must_eat)
+            return(0);
+        i++;
+    }
+    return(1);
 }
 
-void    *supervisor(data_t *philosophers, int time_to_die)
+void    *supervisor(data_t *philosophers, info_t data)
 {
     int i;
     while (1)
     {
         i = 0;
-        while (i < 10)
+        while (i < data.number_of_philosopher)
         {
-            if (get_time() - philosophers[i].last_eat >= time_to_die)
+            if (get_time() - philosophers[i].last_eat >= data.time_to_die)
             {
-                if (!philosophers[i].eat)
-                {
-                    pthread_mutex_lock(&philosophers[i].info->message);
-                    printf("%ld %d died\n",get_time() - philosophers[i].start_time,philosophers[i].nb_philo);
-                    return NULL;
-                }
+                pthread_mutex_lock(&philosophers[i].info->message);
+                printf("%ld %d died\n",get_time() - philosophers[i].start_time,philosophers[i].nb_philo);
+                return NULL;
             }
             i++;
+        }
+        if(data.must_eat != -1)
+        {
+            if(check_must_eat(philosophers, data))
+                return NULL;
         }
     }
 }
@@ -76,4 +87,38 @@ void    print_state(data_t *philosophers, char *str)
     pthread_mutex_lock(&philosophers->info->message);
     printf("%ld %d %s\n",get_time() - philosophers->start_time,philosophers->nb_philo ,str);
     pthread_mutex_unlock(&philosophers->info->message);
+}
+
+void    create_philo_pair(data_t *philosophers, info_t data, info_t *info, pthread_mutex_t *forks)
+{
+	int	i;
+
+	i = 0;
+    while (i < data.number_of_philosopher)
+    {
+        philosophers[i].start_time = data.start_time;
+        philosophers[i].last_eat = get_time();
+        philosophers[i].info = info;
+        philosophers[i].left_fork = &forks[i];
+        philosophers[i].right_fork = &forks[(i + 1) % data.number_of_philosopher];
+        pthread_create(&philosophers[i].thread_id, NULL, routine, &philosophers[i]);
+        i += 2;
+    }
+}
+
+void    create_philo_unpair(data_t *philosophers, info_t data, info_t *info, pthread_mutex_t *forks)
+{
+	int	i;
+
+	i = 1;
+    while (i < data.number_of_philosopher)
+    {
+        philosophers[i].start_time = data.start_time;
+        philosophers[i].last_eat = get_time();
+        philosophers[i].info = info;
+        philosophers[i].left_fork = &forks[i];
+        philosophers[i].right_fork = &forks[(i + 1) % data.number_of_philosopher];
+        pthread_create(&philosophers[i].thread_id, NULL, routine, &philosophers[i]);
+        i += 2;
+    }
 }

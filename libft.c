@@ -6,7 +6,7 @@
 /*   By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 19:10:23 by mouassit          #+#    #+#             */
-/*   Updated: 2022/02/19 19:10:26 by mouassit         ###   ########.fr       */
+/*   Updated: 2022/03/02 16:05:07 by mouassit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,22 @@ int	ft_atoi(const char *str)
 	while (str[i] != '\0' && (str[i] <= '9' && str[i] >= '0'))
 		somme = (str[i++] - '0') + somme * 10;
 	return (a * somme);
+}
+
+int	ft_isdigit(int n)
+{
+	if (n > 47 && n < 58)
+		return (1);
+	else
+		return (0);
+}
+
+size_t	ft_strlen(const char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }

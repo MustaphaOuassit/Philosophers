@@ -6,7 +6,7 @@
 /*   By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 20:40:24 by mouassit          #+#    #+#             */
-/*   Updated: 2022/02/28 16:01:11 by mouassit         ###   ########.fr       */
+/*   Updated: 2022/03/02 09:44:13 by mouassit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int main(int argc,char **argv)
     	philosophers = info_philo(data);
 		forks = info_fork(data.number_of_philosopher);
 		create_threads(data ,philosophers, forks);
-		supervisor(philosophers,data.time_to_die);
+		supervisor(philosophers,data);
     }
 }
