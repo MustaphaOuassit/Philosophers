@@ -6,19 +6,21 @@
 /*   By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 20:41:07 by mouassit          #+#    #+#             */
-/*   Updated: 2022/03/02 16:05:19 by mouassit         ###   ########.fr       */
+/*   Updated: 2022/03/02 18:51:22 by mouassit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <pthread.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/time.h>
+#ifndef PHILOSOPHERS_H
+# define PHILOSOPHERS_H
 
-typedef struct s_info
-{
+# include <stdio.h>
+# include <unistd.h>
+# include <pthread.h>
+# include <stdlib.h>
+# include <string.h>
+# include <sys/time.h>
+
+typedef struct s_info{
 	long			start_time;
 	int				number_of_philosopher;
 	int				time_to_die;
@@ -56,6 +58,9 @@ void			fix_usleep(useconds_t time);
 void			*routine(void *arg);
 void			create_philo_pair(data_t *philosophers, info_t data, info_t *info, pthread_mutex_t *forks);
 void			create_philo_unpair(data_t *philosophers, info_t data, info_t *info, pthread_mutex_t *forks);
+long			get_time_us(void);
 int				ft_atoi(const char *str);
 int				ft_isdigit(int n);
 size_t			ft_strlen(const char *str);
+
+#endif
