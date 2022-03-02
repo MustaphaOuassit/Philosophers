@@ -6,15 +6,15 @@
 /*   By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 18:49:51 by mouassit          #+#    #+#             */
-/*   Updated: 2022/03/02 18:35:55 by mouassit         ###   ########.fr       */
+/*   Updated: 2022/03/02 18:52:47 by mouassit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-data_t	*info_philo(info_t data)
+t_data	*info_philo(t_info data)
 {
-	data_t	*philo;
+	t_data	*philo;
 	int		i;
 
 	philo = malloc(sizeof(*philo) * data.number_of_philosopher);
@@ -66,7 +66,7 @@ int	check_len_nb(int argc, char **argv)
 	return (1);
 }
 
-int	check_info(int argc, char **argv, info_t *data)
+int	check_info(int argc, char **argv, t_info *data)
 {
 	int	i;
 

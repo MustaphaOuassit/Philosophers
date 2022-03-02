@@ -6,7 +6,7 @@
 /*   By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 20:41:07 by mouassit          #+#    #+#             */
-/*   Updated: 2022/03/02 18:51:22 by mouassit         ###   ########.fr       */
+/*   Updated: 2022/03/02 18:55:40 by mouassit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ typedef struct s_info{
 	int				time_to_sleep;
 	int				must_eat;
 	pthread_mutex_t	message;
-}	info_t;
+}	t_info;
 
 typedef struct s_data
 {
 	pthread_t		thread_id;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
-	info_t			*info;
+	t_info			*info;
 	int				nb_philo;
 	long			start_time;
 	int				eat;
@@ -43,21 +43,24 @@ typedef struct s_data
 	int				time_to_sleep;
 	int				philo_must_eat;
 	long			last_eat;
-}	data_t;
+}	t_data;
 
-int				check_info(int argc, char **argv,info_t *data);
-data_t			*info_philo(info_t data);
+int				check_info(int argc, char **argv, t_info *data);
+t_data			*info_philo(t_info data);
 pthread_mutex_t	*info_fork(int nb_philo);
-void			create_threads(info_t data ,data_t *philosophers, pthread_mutex_t *forks);
-long			get_time();
-void			put_forks(data_t *philosophers);
+void			create_threads(t_info data, t_data *philosophers,
+					pthread_mutex_t *forks);
+long			get_time(void);
+void			put_forks(t_data *philosophers);
 void			edit_usleep(long time);
-void			*supervisor(data_t *philosophers, info_t data);
-void			print_state(data_t *philosophers, char *str);
+void			*supervisor(t_data *philosophers, t_info data);
+void			print_state(t_data *philosophers, char *str);
 void			fix_usleep(useconds_t time);
 void			*routine(void *arg);
-void			create_philo_pair(data_t *philosophers, info_t data, info_t *info, pthread_mutex_t *forks);
-void			create_philo_unpair(data_t *philosophers, info_t data, info_t *info, pthread_mutex_t *forks);
+void			create_philo_pair(t_data *philosophers, t_info data,
+					t_info *info, pthread_mutex_t *forks);
+void			create_philo_unpair(t_data *philosophers, t_info data,
+					t_info *info, pthread_mutex_t *forks);
 long			get_time_us(void);
 int				ft_atoi(const char *str);
 int				ft_isdigit(int n);

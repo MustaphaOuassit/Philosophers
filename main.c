@@ -6,7 +6,7 @@
 /*   By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 20:40:24 by mouassit          #+#    #+#             */
-/*   Updated: 2022/03/02 18:11:14 by mouassit         ###   ########.fr       */
+/*   Updated: 2022/03/02 18:52:47 by mouassit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	main(int argc, char **argv)
 {
-	info_t			data;
-	data_t			*philosophers;
+	t_info			data;
+	t_data			*philosophers;
 	pthread_mutex_t	*forks;
 
 	if (!check_info(argc, argv, &data))

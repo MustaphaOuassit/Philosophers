@@ -6,13 +6,13 @@
 /*   By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 19:34:34 by mouassit          #+#    #+#             */
-/*   Updated: 2022/03/02 18:40:27 by mouassit         ###   ########.fr       */
+/*   Updated: 2022/03/02 18:52:47 by mouassit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	take_two_forks(data_t *philosophers)
+void	take_two_forks(t_data *philosophers)
 {
 	pthread_mutex_lock(philosophers->left_fork);
 	print_state(philosophers, "has taken a fork");
@@ -20,7 +20,7 @@ void	take_two_forks(data_t *philosophers)
 	print_state(philosophers, "has taken a fork");
 }
 
-void	eating(data_t *philosophers)
+void	eating(t_data *philosophers)
 {
 	print_state(philosophers, "is eating");
 	fix_usleep(philosophers->time_to_eat * 1000);
@@ -29,7 +29,7 @@ void	eating(data_t *philosophers)
 	put_forks(philosophers);
 }
 
-void	sleeping(data_t *philosophers)
+void	sleeping(t_data *philosophers)
 {
 	print_state(philosophers, "is sleeping");
 	fix_usleep(philosophers->time_to_sleep * 1000);
@@ -37,7 +37,7 @@ void	sleeping(data_t *philosophers)
 
 void	*routine(void *arg)
 {
-	data_t	*philosophers;
+	t_data	*philosophers;
 
 	philosophers = arg;
 	while (1)
@@ -50,10 +50,10 @@ void	*routine(void *arg)
 	return (NULL);
 }
 
-void	create_threads(info_t data, data_t *philosophers
+void	create_threads(t_info data, t_data *philosophers
 , pthread_mutex_t *forks)
 {
-	info_t			*info;
+	t_info			*info;
 	pthread_mutex_t	message;
 
 	info = malloc(sizeof(*info));

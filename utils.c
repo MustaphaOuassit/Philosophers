@@ -6,7 +6,7 @@
 /*   By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 06:17:52 by mouassit          #+#    #+#             */
-/*   Updated: 2022/03/02 18:31:35 by mouassit         ###   ########.fr       */
+/*   Updated: 2022/03/02 18:52:47 by mouassit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ long	get_time_us(void)
 	return ((time.tv_sec * 1000000) + time.tv_usec);
 }
 
-void	put_forks(data_t *philosophers)
+void	put_forks(t_data *philosophers)
 {
 	pthread_mutex_unlock(philosophers->left_fork);
 	pthread_mutex_unlock(philosophers->right_fork);
 }
 
-int	check_must_eat(data_t *philosophers, info_t data)
+int	check_must_eat(t_data *philosophers, t_info data)
 {
 	int	i;
 
@@ -48,7 +48,7 @@ int	check_must_eat(data_t *philosophers, info_t data)
 	return (1);
 }
 
-void	*supervisor(data_t *philosophers, info_t data)
+void	*supervisor(t_data *philosophers, t_info data)
 {
 	int	i;
 

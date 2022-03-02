@@ -6,7 +6,7 @@
 /*   By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 15:34:21 by mouassit          #+#    #+#             */
-/*   Updated: 2022/03/02 18:42:11 by mouassit         ###   ########.fr       */
+/*   Updated: 2022/03/02 18:52:47 by mouassit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	fix_usleep(useconds_t time)
 		;
 }
 
-void	print_state(data_t *philosophers, char *str)
+void	print_state(t_data *philosophers, char *str)
 {
 	pthread_mutex_lock(&philosophers->info->message);
 	printf("%ld %d %s\n", get_time() - philosophers->start_time,
@@ -45,7 +45,7 @@ void	print_state(data_t *philosophers, char *str)
 	pthread_mutex_unlock(&philosophers->info->message);
 }
 
-void	create_philo_pair(data_t *philosophers, info_t data, info_t *info
+void	create_philo_pair(t_data *philosophers, t_info data, t_info *info
 , pthread_mutex_t *forks)
 {
 	int	i;
@@ -65,7 +65,7 @@ void	create_philo_pair(data_t *philosophers, info_t data, info_t *info
 	}
 }
 
-void	create_philo_unpair(data_t *philosophers, info_t data, info_t *info
+void	create_philo_unpair(t_data *philosophers, t_info data, t_info *info
 , pthread_mutex_t *forks)
 {
 	int	i;
