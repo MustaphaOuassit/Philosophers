@@ -26,10 +26,10 @@ void	eating(t_data *philosophers)
 	pthread_mutex_lock(&philosophers->check_eat);
 	philosophers->last_eat = get_time();
 	print_state(philosophers, "is eating");
+	philosophers->philo_must_eat++;
 	philosophers->eat = 0;
 	pthread_mutex_unlock(&philosophers->check_eat);
 	fix_usleep(philosophers->time_to_eat * 1000);
-	philosophers->philo_must_eat++;
 	put_forks(philosophers);
 }
 
