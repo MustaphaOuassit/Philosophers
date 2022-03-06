@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.c                                            :+:      :+:    :+:   */
+/*   assets.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/19 19:10:23 by mouassit          #+#    #+#             */
-/*   Updated: 2022/03/02 18:42:22 by mouassit         ###   ########.fr       */
+/*   Created: 2022/03/06 16:52:09 by mouassit          #+#    #+#             */
+/*   Updated: 2022/03/06 16:53:20 by mouassit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,14 @@ size_t	ft_strlen(const char *str)
 	while (str[i])
 		i++;
 	return (i);
+}
+
+int	must_eat(t_info data, t_data *philosophers)
+{
+	if (data.must_eat != -1)
+	{
+		if (check_must_eat(philosophers, data))
+			return (1);
+	}
+	return (0);
 }

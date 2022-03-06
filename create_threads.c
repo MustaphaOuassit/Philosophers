@@ -6,7 +6,7 @@
 /*   By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 19:34:34 by mouassit          #+#    #+#             */
-/*   Updated: 2022/03/02 18:52:47 by mouassit         ###   ########.fr       */
+/*   Updated: 2022/03/06 16:53:28 by mouassit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,14 @@ void	take_two_forks(t_data *philosophers)
 
 void	eating(t_data *philosophers)
 {
+	philosophers->eat = 1;
+	pthread_mutex_lock(&philosophers->check_eat);
+	philosophers->last_eat = get_time();
 	print_state(philosophers, "is eating");
+	philosophers->eat = 0;
+	pthread_mutex_unlock(&philosophers->check_eat);
 	fix_usleep(philosophers->time_to_eat * 1000);
 	philosophers->philo_must_eat++;
-	philosophers->last_eat = get_time();
 	put_forks(philosophers);
 }
 

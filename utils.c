@@ -6,7 +6,7 @@
 /*   By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 06:17:52 by mouassit          #+#    #+#             */
-/*   Updated: 2022/03/02 18:52:47 by mouassit         ###   ########.fr       */
+/*   Updated: 2022/03/06 16:44:48 by mouassit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,22 @@ void	*supervisor(t_data *philosophers, t_info data)
 		i = 0;
 		while (i < data.number_of_philosopher)
 		{
+			pthread_mutex_lock(&philosophers[i].check_eat);
 			if (get_time() - philosophers[i].last_eat >= data.time_to_die)
 			{
-				pthread_mutex_lock(&philosophers[i].info->message);
-				printf("%ld %d died\n", get_time() - philosophers[i].start_time,
-					philosophers[i].nb_philo);
-				return (NULL);
+				if (!philosophers[i].eat)
+				{
+					pthread_mutex_lock(&philosophers[i].info->message);
+					printf("%ld %d died\n",
+						get_time() - philosophers[i].start_time,
+						philosophers[i].nb_philo);
+					return (NULL);
+				}
 			}
+			pthread_mutex_unlock(&philosophers[i].check_eat);
 			i++;
 		}
-		if (data.must_eat != -1)
-		{
-			if (check_must_eat(philosophers, data))
-				return (NULL);
-		}
+		if (must_eat(data, philosophers))
+			return (NULL);
 	}
 }

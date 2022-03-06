@@ -6,7 +6,7 @@
 /*   By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 18:49:51 by mouassit          #+#    #+#             */
-/*   Updated: 2022/03/02 18:52:47 by mouassit         ###   ########.fr       */
+/*   Updated: 2022/03/06 15:36:02 by mouassit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ t_data	*info_philo(t_info data)
 		philo[i].time_to_eat = data.time_to_eat;
 		philo[i].time_to_sleep = data.time_to_sleep;
 		philo[i].philo_must_eat = 0;
+		philo[i].eat = 0;
+		pthread_mutex_init(&philo[i].check_eat, NULL);
 		i++;
 	}
 	return (philo);

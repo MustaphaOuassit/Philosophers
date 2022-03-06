@@ -6,7 +6,7 @@
 /*   By: mouassit <mouassit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 20:41:07 by mouassit          #+#    #+#             */
-/*   Updated: 2022/03/02 18:55:40 by mouassit         ###   ########.fr       */
+/*   Updated: 2022/03/06 16:45:11 by mouassit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_data
 	pthread_t		thread_id;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
+	pthread_mutex_t	check_eat;
 	t_info			*info;
 	int				nb_philo;
 	long			start_time;
@@ -61,6 +62,8 @@ void			create_philo_pair(t_data *philosophers, t_info data,
 					t_info *info, pthread_mutex_t *forks);
 void			create_philo_unpair(t_data *philosophers, t_info data,
 					t_info *info, pthread_mutex_t *forks);
+int				check_must_eat(t_data *philosophers, t_info data);
+int				must_eat(t_info data, t_data *philosophers);
 long			get_time_us(void);
 int				ft_atoi(const char *str);
 int				ft_isdigit(int n);
